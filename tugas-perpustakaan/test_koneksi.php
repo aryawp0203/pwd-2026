@@ -3,7 +3,7 @@
 
 require_once "koneksi.php";
 
-// Mengambil informasi server
+// Mengambil versi server
 $versi_server = mysqli_get_server_info($koneksi);
 
 // Menutup koneksi
