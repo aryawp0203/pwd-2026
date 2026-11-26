@@ -89,7 +89,7 @@ $pesan_db = "";
 if (empty($errors)) {
 
     // Memanggil koneksi database
-    require_once "koneksi.php";
+    require_once __DIR__ . '/koneksi.php';
 
     // Perintah SQL INSERT dengan prepared statement
     $sql = "INSERT INTO anggota

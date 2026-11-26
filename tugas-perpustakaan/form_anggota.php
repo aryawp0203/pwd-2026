@@ -51,7 +51,7 @@ $status = isset($_GET["status"]) ? $_GET["status"] : "";
 <body>
 
     <h1>Pendaftaran Anggota Perpustakaan</h1>
-    <p><a href="data.php">Lihat data anggota</a></p>
+    <p><a href="data_anggota.php">Lihat data anggota</a></p>
 
     <?php if ($status === "sukses") { ?>
         <p class="sukses">

@@ -1,5 +1,5 @@
 <?php
-require_once 'koneksi.php';
+require_once __DIR__ . '/koneksi.php';
 
 $hasil = mysqli_query($koneksi, "SELECT * FROM anggota ORDER BY id ASC");
 if (!$hasil) {
@@ -14,7 +14,7 @@ $jml_data = mysqli_num_rows($hasil);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Data Anggota Perpustakaan</title>
-    <style>
+    <!-- <style>
         body {
             font-family: Arial, sans-serif;
             margin: 40px;
@@ -39,16 +39,16 @@ $jml_data = mysqli_num_rows($hasil);
         th {
             background: #eaf0f8;
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
     <h1>Data Anggota Perpustakaan</h1>
-    <p>Jumlah data anggota: <?php echo $jml_data; ?> data</p>
+    <p>Jumlah data anggota: <?= $jml_data; ?> data</p>
     <p><a href="form_anggota.php">Tambah anggota</a></p>
 
     <?php if ($jml_data > 0) { ?>
-        <table>
+        <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">
             <thead>
                 <tr>
                     <th>No</th>
@@ -64,22 +64,27 @@ $jml_data = mysqli_num_rows($hasil);
             <tbody>
                 <?php
                 $no = 1;
-                while ($baris = mysqli_fetch_assoc($hasil)) {
+                while ($data = mysqli_fetch_assoc($hasil)) {
                 ?>
                     <tr>
-                        <td><?php echo $no++; ?></td>
-                        <td><?php echo htmlspecialchars($baris['no_anggota']); ?></td>
-                        <td><?php echo htmlspecialchars($baris['nama_lengkap']); ?></td>
-                        <td><?php echo htmlspecialchars($baris['email']); ?></td>
-                        <td><?php echo htmlspecialchars($baris['no_hp']); ?></td>
-                        <td><?php echo htmlspecialchars($baris['jenis_anggota']); ?></td>
-                        <td><?php echo htmlspecialchars($baris['alamat']); ?></td>
+                        <td><?= $no++; ?></td>
+                        <td><?= htmlspecialchars($data['no_anggota']); ?></td>
+                        <td><?= htmlspecialchars($data['nama_lengkap']); ?></td>
+                        <td><?= htmlspecialchars($data['email']); ?></td>
+                        <td><?= htmlspecialchars($data['no_hp']); ?></td>
+                        <td><?= htmlspecialchars($data['jenis_anggota']); ?></td>
+                        <td><?= htmlspecialchars($data['alamat']); ?></td>
                         <td>
-                            <a href="detail.php?id=<?php echo (int) $baris['id']; ?>">Detail</a>
-                            <form class="inline" action="hapus.php" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                                <input type="hidden" name="id" value="<?php echo (int) $baris['id']; ?>">
+                            <!-- tombol detail -->
+                            <!-- <a href="detail.php?id=<?= $data['id']; ?>">Detail</a> | -->
+                            <!-- tombol edit -->
+                            <a href="edit_anggota.php?id=<?= $data['id']; ?>">Edit</a> |
+                            <!-- tombol hapus -->
+                            <form action="hapus_anggota.php" method="post" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                <input type="hidden" name="id" value="<?= $data['id']; ?>">
                                 <button type="submit">Hapus</button>
                             </form>
+                            <!-- <a href="hapus.php?id=<?= $data['id']; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">Hapus</a> -->
                         </td>
                     </tr>
                 <?php } ?>
