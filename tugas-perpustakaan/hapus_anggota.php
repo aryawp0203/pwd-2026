@@ -19,7 +19,7 @@ if (mysqli_stmt_execute($stmt)) {
     // Tutup statement
     mysqli_stmt_close($stmt);
     // Jika berhasil, redirect ke halaman data_anggota.php
-    header("Location: data_anggota.php");
+    header("Location: data_anggota.php?status=hapus");
     exit();
 } else {
     // Jika gagal, tampilkan pesan error

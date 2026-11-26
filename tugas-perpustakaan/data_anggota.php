@@ -6,7 +6,10 @@ if (!$hasil) {
     die("Gagal mengambil data anggota: " . htmlspecialchars(mysqli_error($koneksi), ENT_QUOTES, 'UTF-8'));
 }
 $jml_data = mysqli_num_rows($hasil);
+
+$status = isset($_GET["status"]) ? $_GET["status"] : "";
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -46,6 +49,12 @@ $jml_data = mysqli_num_rows($hasil);
     <h1>Data Anggota Perpustakaan</h1>
     <p>Jumlah data anggota: <?= $jml_data; ?> data</p>
     <p><a href="form_anggota.php">Tambah anggota</a></p>
+
+    <?php if ($status === 'hapus') { ?>
+        <p style="color: green;">Data anggota berhasil dihapus.</p>
+    <?php } else if ($status === 'update') { ?>
+        <p style="color: green;">Data anggota berhasil diperbarui.</p>
+    <?php } ?>
 
     <?php if ($jml_data > 0) { ?>
         <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">
